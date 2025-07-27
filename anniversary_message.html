@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Anniversary, Babe ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffe5ec, #ffc6d0, #fff1e6);
+      overflow: hidden;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hearts span {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: #ff85a2;
+      clip-path: polygon(50% 0%, 61% 18%, 82% 20%, 70% 40%, 75% 60%, 50% 50%, 25% 60%, 30% 40%, 18% 20%, 39% 18%);
+      animation: floatHearts 8s linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(100vh) scale(1) rotate(0deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-10vh) scale(0.8) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .envelope-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      z-index: 2;
+      position: relative;
+    }
+
+    .envelope-label {
+      font-size: 1.5rem;
+      color: #d63384;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #ffb3c6;
+    }
+
+    .envelope {
+      width: 150px;
+      height: 100px;
+      background: #ffafcc;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .envelope:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #ff5d8f;
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .card {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 700px;
+      margin: 40px auto;
+      text-align: center;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 3;
+    }
+
+    .card.show {
+      display: block;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+        img {
+  width: 100%;
+  height: 500px; /* Adjust height to show more of the image */
+  object-fit: cover;
+  object-position: center; /* This focuses on the top-center area, where faces usually are */
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+    h1 {
+      color: #d63384;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-shadow: 0 0 5px #ffb3c6;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .heart {
+      font-size: 3rem;
+      margin-top: 25px;
+      animation: pulse 1.5s infinite;
+      color: #ff3366;
+      text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating hearts -->
+  <div class="hearts">
+    <span style="left: 10%; animation-delay: 0s;"></span>
+    <span style="left: 25%; animation-delay: 2s;"></span>
+    <span style="left: 40%; animation-delay: 4s;"></span>
+    <span style="left: 60%; animation-delay: 1s;"></span>
+    <span style="left: 75%; animation-delay: 3s;"></span>
+    <span style="left: 90%; animation-delay: 5s;"></span>
+  </div>
+
+  <!-- Envelope -->
+  <div class="envelope-container" id="envelopeContainer">
+    <div class="envelope-label">💌 Happy Anniversary 💌</div>
+    <div class="envelope" onclick="openMessage()"></div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgMusic" src="assets/High - Lighthouse.mp3"></audio>
+
+  <!-- Message Card -->
+  <div class="card" id="messageCard">
+    <img src="assets/aniv_pic.jpg" alt="Us Together">
+    <h1>Hi Mahal,</h1>
+    <p>
+      I just wanna say I’m really thankful to have you.<br>
+      You never gave up on us, even when we went through the worst.<br>
+      That means everything to me.
+    </p>
+    <p>
+      Happy 3 years of this crazy, roller coaster ride with you.<br>
+      I love you so much.<br>
+      Here’s to more years of us, no matter what.
+    </p>
+    <div class="heart">❤️</div>
+  </div>
+
+  <script>
+    function openMessage() {
+      document.getElementById("envelopeContainer").style.display = "none";
+      document.getElementById("messageCard").classList.add("show");
+      const audio = document.getElementById("bgMusic");
+      if (audio) {
+        audio.play().catch(err => console.warn("Audio autoplay failed:", err));
+      }
+    }
+  </script>
+
+</body>
+</html>
