@@ -96,17 +96,21 @@
 
   /* Card message container */
   .card {
-    display: none;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 40px;
-    border-radius: 25px;
-    max-width: 800px;
-    margin: 40px auto;
-    text-align: center;
-    box-shadow: 0 25px 35px rgba(0, 0, 0, 0.25);
-    position: relative;
-    z-index: 3;
-  }
+  display: none;
+  background: radial-gradient(circle, #fff0f5 0%, #ffe0ec 100%);
+  padding: 50px;
+  border-radius: 30px;
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+  box-shadow: 0 30px 40px rgba(255, 105, 180, 0.3),
+              0 0 40px rgba(255, 192, 203, 0.2) inset;
+  position: relative;
+  z-index: 3;
+  border: 3px solid #ffb6c1;
+  animation: fadeIn 1s ease;
+}
+
 
   .card.show {
     display: block;
