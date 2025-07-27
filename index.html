@@ -14,7 +14,6 @@
     overflow: hidden;
   }
 
-  /* Floating hearts background */
   .hearts {
     position: fixed;
     top: 0;
@@ -47,7 +46,6 @@
     }
   }
 
-  /* Envelope animation container */
   .envelope-container {
     display: flex;
     flex-direction: column;
@@ -94,24 +92,20 @@
     transform: scale(1.05);
   }
 
-  /* Card message container */
   .card {
-  display: none;
-  background: radial-gradient(circle, #fff0f5 0%, #ffe0ec 100%);
-  padding: 50px;
-  border-radius: 30px;
-  max-width: 800px;
-  margin: 40px auto;
-  text-align: center;
-  box-shadow: 0 30px 40px rgba(255, 105, 180, 0.3),
-              0 0 40px rgba(255, 192, 203, 0.2) inset;
-  position: relative;
-  z-index: 3;
-  border: 3px solid #ffb6c1;
-  animation: fadeIn 1s ease;
-
-}
-
+    display: none;
+    background: radial-gradient(circle, #fff0f5 0%, #ffe0ec 100%);
+    padding: 50px;
+    border-radius: 30px;
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 30px 40px rgba(255, 105, 180, 0.3), 0 0 40px rgba(255, 192, 203, 0.2) inset;
+    position: relative;
+    z-index: 3;
+    border: 3px solid #ffb6c1;
+    animation: fadeIn 1s ease;
+  }
 
   .card.show {
     display: block;
@@ -129,7 +123,6 @@
     }
   }
 
-  /* Slideshow styling */
   #slideshow {
     position: relative;
     width: 100%;
@@ -163,12 +156,6 @@
     text-shadow: 0 0 5px #ffb3c6;
   }
 
-  p {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    color: #333;
-  }
-
   .heart {
     font-size: 3rem;
     margin-top: 25px;
@@ -186,7 +173,6 @@
     }
   }
 
-  /* Final love message */
   #finalMessage {
     display: none;
     position: fixed;
@@ -211,8 +197,17 @@
       transform: translate(-50%, -50%) scale(1);
     }
   }
-</style>
 
+  .typewriter-text {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    color: #e91e63;
+    white-space: pre-line;
+    border-right: 2px solid #e91e63;
+    overflow: hidden;
+    display: inline-block;
+  }
+  </style>
 </head>
 <body>
   <div class="hearts">
@@ -232,32 +227,19 @@
   <audio id="bgMusic" src="assets/High - Lighthouse.mp3"></audio>
 
   <div class="card" id="messageCard">
-  <div id="messageContent">
-    <div id="slideshow">
-      <img id="slideshow-img" src="assets/aniv_pic.jpg" />
+    <div id="messageContent">
+      <div id="slideshow">
+        <img id="slideshow-img" src="assets/aniv_pic.jpg" />
+      </div>
+      <h1>Hi Mahal,</h1>
+      <div id="typedMessage" class="typewriter-text"></div>
+      <div class="heart">❤️</div>
     </div>
-    <h1>Hi Mahal,</h1>
-    <p>
-      I just want to say how thankful I am to have you.
-      You never gave up on us, even when we went through the worst.
-      That means everything to me.
-    </p>
-    <p>
-      Happy 3 years of this crazy, roller-coaster ride with you.
-      I love you so much.
-      Here’s to many more years of us—no matter what.
-    </p>
-    <div class="heart">❤️</div>
   </div>
-</div>
 
-<!-- FINAL MESSAGE OUTSIDE the card -->
-<div id="finalMessage">
-  I LOVE YOU
-</div>
-
-
-
+  <div id="finalMessage">
+    I LOVE YOU
+  </div>
 
   <script>
     const imagePaths = [
@@ -285,7 +267,6 @@
           currentImgIndex = (currentImgIndex + 1) % imagePaths.length;
           const newSrc = imagePaths[currentImgIndex];
           imgElement.src = newSrc;
-
           imgElement.className = "";
 
           if (newSrc.includes("pic2") || newSrc.includes("us_together")) {
@@ -298,25 +279,42 @@
     }
 
     function openMessage() {
-  document.getElementById("envelopeContainer").style.display = "none";
-  document.getElementById("messageCard").classList.add("show");
+      document.getElementById("envelopeContainer").style.display = "none";
+      document.getElementById("messageCard").classList.add("show");
 
-  const audio = document.getElementById("bgMusic");
-  if (audio) {
-    audio.play().catch(err => console.warn("Audio autoplay failed:", err));
+      const audio = document.getElementById("bgMusic");
+      if (audio) {
+        audio.play().catch(err => console.warn("Audio autoplay failed:", err));
 
-    audio.addEventListener("ended", () => {
-      document.getElementById("messageContent").style.display = "none";
-      document.getElementById("messageCard").style.display = "none";
-      document.getElementById("finalMessage").style.display = "block";
+        audio.addEventListener("ended", () => {
+          document.getElementById("messageContent").style.display = "none";
+          document.getElementById("messageCard").style.display = "none";
+          document.getElementById("finalMessage").style.display = "block";
+        });
+      }
 
-    });
-  }
+      startSlideshow();
+      typeText();
+    }
 
-  startSlideshow();
-}
+    function typeText() {
+      const message = `I just want to say how thankful I am to have you.\nYou never gave up on us, even when we went through the worst.\nThat means everything to me.\n\nHappy 3 years of this crazy, roller-coaster ride with you.\nI love you so much.\nHere’s to many more years of us—no matter what.`;
+      const typedElement = document.getElementById("typedMessage");
+      let index = 0;
 
+      function typeChar() {
+        if (index < message.length) {
+          const char = message.charAt(index);
+          typedElement.innerHTML += (char === "\n") ? "<br>" : char;
+          index++;
+          setTimeout(typeChar, 50);
+        } else {
+          typedElement.style.borderRight = "none";
+        }
+      }
 
+      typeChar();
+    }
   </script>
 </body>
 </html>
