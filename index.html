@@ -5,194 +5,209 @@
   <title>Happy Anniversary, Mahal ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffe5ec, #ffc6d0, #fff1e6);
-      overflow: hidden;
-    }
-
-    .hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .hearts span {
-      position: absolute;
-      display: block;
-      width: 20px;
-      height: 20px;
-      background: #ff85a2;
-      clip-path: polygon(50% 0%, 61% 18%, 82% 20%, 70% 40%, 75% 60%, 50% 50%, 25% 60%, 30% 40%, 18% 20%, 39% 18%);
-      animation: floatHearts 8s linear infinite;
-      opacity: 0.5;
-    }
-
-    @keyframes floatHearts {
-      0% {
-        transform: translateY(100vh) scale(1) rotate(0deg);
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-10vh) scale(0.8) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .envelope-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      z-index: 2;
-      position: relative;
-    }
-
-    .envelope-label {
-      font-size: 1.8rem;
-      color: #d63384;
-      font-weight: bold;
-      margin-bottom: 20px;
-      text-shadow: 0 0 5px #ffb3c6;
-    }
-
-    .envelope {
-      width: 160px;
-      height: 110px;
-      background: #ffafcc;
-      border-radius: 12px;
-      position: relative;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .envelope:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      background: #ff5d8f;
-      clip-path: polygon(0 0, 50% 100%, 100% 0);
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
-
-    .envelope:hover {
-      transform: scale(1.05);
-    }
-
-    .card {
-      display: none;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 40px;
-      border-radius: 25px;
-      max-width: 800px;
-      margin: 40px auto;
-      text-align: center;
-      box-shadow: 0 25px 35px rgba(0, 0, 0, 0.25);
-      position: relative;
-      z-index: 3;
-    }
-
-    .card.show {
-      display: block;
-      animation: fadeIn 1s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    #slideshow {
-      position: relative;
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto 20px auto;
-      overflow: hidden;
-    }
-
-    #slideshow img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 3 / 2;
-      object-fit: cover;
-      object-position: center;
-      border-radius: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      transition: opacity 0.8s ease-in-out, transform 0.8s ease;
-    }
-
-    img.custom-pic2, img.custom-us {
-      transform: scale(0.85);
-      transition: transform 0.8s ease;
-    }
-
-    h1 {
-      color: #d63384;
-      margin-bottom: 20px;
-      font-size: 2.2rem;
-      text-shadow: 0 0 5px #ffb3c6;
-    }
-
-    p {
-      font-size: 1.25rem;
-      line-height: 1.8;
-      color: #333;
-    }
-
-    .heart {
-      font-size: 3rem;
-      margin-top: 25px;
-      animation: pulse 1.5s infinite;
-      color: #ff3366;
-      text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
-    }
-
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-
-    #finalMessage {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 4rem;
-  color: #ff3366;
-  font-weight: bold;
-  text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
-  z-index: 999;
-  animation: fadeInLove 2s ease-in forwards;
-}
-
-@keyframes fadeInLove {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffe5ec, #ffc6d0, #fff1e6);
+    overflow: hidden;
   }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+
+  /* Floating hearts background */
+  .hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
   }
-}
-  </style>
+
+  .hearts span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: #ff85a2;
+    clip-path: polygon(50% 0%, 61% 18%, 82% 20%, 70% 40%, 75% 60%, 50% 50%, 25% 60%, 30% 40%, 18% 20%, 39% 18%);
+    animation: floatHearts 8s linear infinite;
+    opacity: 0.5;
+  }
+
+  @keyframes floatHearts {
+    0% {
+      transform: translateY(100vh) scale(1) rotate(0deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-10vh) scale(0.8) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Envelope animation container */
+  .envelope-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    z-index: 2;
+    position: relative;
+  }
+
+  .envelope-label {
+    font-size: 1.8rem;
+    color: #d63384;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px #ffb3c6;
+  }
+
+  .envelope {
+    width: 160px;
+    height: 110px;
+    background: #ffafcc;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #ff5d8f;
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .envelope:hover {
+    transform: scale(1.05);
+  }
+
+  /* Card message container */
+  .card {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 25px;
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 25px 35px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: 3;
+  }
+
+  .card.show {
+    display: block;
+    animation: fadeIn 1s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Slideshow styling */
+  #slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 20px auto;
+    overflow: hidden;
+  }
+
+  #slideshow img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease;
+  }
+
+  img.custom-pic2,
+  img.custom-us {
+    transform: scale(0.85);
+    transition: transform 0.8s ease;
+  }
+
+  h1 {
+    color: #d63384;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+    text-shadow: 0 0 5px #ffb3c6;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .heart {
+    font-size: 3rem;
+    margin-top: 25px;
+    animation: pulse 1.5s infinite;
+    color: #ff3366;
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+
+  /* Final love message */
+  #finalMessage {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: #ff3366;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+    z-index: 999;
+    animation: fadeInLove 2s ease-in forwards;
+  }
+
+  @keyframes fadeInLove {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+</style>
+
 </head>
 <body>
   <div class="hearts">
