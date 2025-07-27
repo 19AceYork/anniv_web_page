@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Happy Anniversary, Babe ❤️</title>
+  <title>Happy Anniversary, Mahal ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
@@ -57,7 +57,7 @@
     }
 
     .envelope-label {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: #d63384;
       font-weight: bold;
       margin-bottom: 20px;
@@ -65,10 +65,10 @@
     }
 
     .envelope {
-      width: 150px;
-      height: 100px;
+      width: 160px;
+      height: 110px;
       background: #ffafcc;
-      border-radius: 10px;
+      border-radius: 12px;
       position: relative;
       box-shadow: 0 5px 20px rgba(0,0,0,0.2);
       cursor: pointer;
@@ -95,12 +95,12 @@
     .card {
       display: none;
       background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 20px;
-      max-width: 700px;
+      padding: 40px;
+      border-radius: 25px;
+      max-width: 800px;
       margin: 40px auto;
       text-align: center;
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 25px 35px rgba(0, 0, 0, 0.25);
       position: relative;
       z-index: 3;
     }
@@ -115,25 +115,40 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-        img {
-  width: 100%;
-  height: 500px; /* Adjust height to show more of the image */
-  object-fit: cover;
-  object-position: center; /* This focuses on the top-center area, where faces usually are */
-  border-radius: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
+    #slideshow {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 20px auto;
+      overflow: hidden;
+    }
+
+    #slideshow img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: opacity 0.8s ease-in-out, transform 0.8s ease;
+    }
+
+    img.custom-pic2, img.custom-us {
+      transform: scale(0.85);
+      transition: transform 0.8s ease;
+    }
 
     h1 {
       color: #d63384;
       margin-bottom: 20px;
-      font-size: 2rem;
+      font-size: 2.2rem;
       text-shadow: 0 0 5px #ffb3c6;
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       line-height: 1.8;
       color: #333;
     }
@@ -146,15 +161,40 @@
       text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
     }
 
+
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
+
+
+    #finalMessage {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  color: #ff3366;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+  z-index: 999;
+  animation: fadeInLove 2s ease-in forwards;
+}
+
+@keyframes fadeInLove {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
   </style>
 </head>
 <body>
-
-  <!-- Floating hearts -->
   <div class="hearts">
     <span style="left: 10%; animation-delay: 0s;"></span>
     <span style="left: 25%; animation-delay: 2s;"></span>
@@ -164,18 +204,18 @@
     <span style="left: 90%; animation-delay: 5s;"></span>
   </div>
 
-  <!-- Envelope -->
   <div class="envelope-container" id="envelopeContainer">
     <div class="envelope-label">💌 Happy Anniversary 💌</div>
     <div class="envelope" onclick="openMessage()"></div>
   </div>
 
-  <!-- Audio -->
   <audio id="bgMusic" src="assets/High - Lighthouse.mp3"></audio>
 
-  <!-- Message Card -->
   <div class="card" id="messageCard">
-    <img src="assets/aniv_pic.jpg" alt="Us Together">
+  <div id="messageContent">
+    <div id="slideshow">
+      <img id="slideshow-img" src="assets/aniv_pic.jpg" />
+    </div>
     <h1>Hi Mahal,</h1>
     <p>
       I just wanna say I’m really thankful to have you.<br>
@@ -189,17 +229,74 @@
     </p>
     <div class="heart">❤️</div>
   </div>
+</div>
+
+<!-- FINAL MESSAGE OUTSIDE the card -->
+<div id="finalMessage">
+  I LOVE YOU
+</div>
+
+
+
 
   <script>
-    function openMessage() {
-      document.getElementById("envelopeContainer").style.display = "none";
-      document.getElementById("messageCard").classList.add("show");
-      const audio = document.getElementById("bgMusic");
-      if (audio) {
-        audio.play().catch(err => console.warn("Audio autoplay failed:", err));
-      }
-    }
-  </script>
+    const imagePaths = [
+      'assets/aniv_pic.jpg',
+      'assets/pic1.jpg',
+      'assets/pic2.png',
+      'assets/pic4.jpg',
+      'assets/pic5.jpg',
+      'assets/us_together.jpg',
+      'assets/pic6.jpg'
+    ];
 
+    let currentImgIndex = 0;
+    let slideshowStarted = false;
+
+    function startSlideshow() {
+      const imgElement = document.getElementById("slideshow-img");
+      if (!imgElement || slideshowStarted) return;
+      slideshowStarted = true;
+
+      setInterval(() => {
+        imgElement.style.opacity = 0;
+
+        setTimeout(() => {
+          currentImgIndex = (currentImgIndex + 1) % imagePaths.length;
+          const newSrc = imagePaths[currentImgIndex];
+          imgElement.src = newSrc;
+
+          imgElement.className = "";
+
+          if (newSrc.includes("pic2") || newSrc.includes("us_together")) {
+            imgElement.classList.add(`custom-${newSrc.includes("pic2") ? 'pic2' : 'us'}`);
+          }
+
+          imgElement.style.opacity = 1;
+        }, 500);
+      }, 3500);
+    }
+
+    function openMessage() {
+  document.getElementById("envelopeContainer").style.display = "none";
+  document.getElementById("messageCard").classList.add("show");
+
+  const audio = document.getElementById("bgMusic");
+  if (audio) {
+    audio.play().catch(err => console.warn("Audio autoplay failed:", err));
+
+    audio.addEventListener("ended", () => {
+      document.getElementById("messageContent").style.display = "none";
+      document.getElementById("messageCard").style.display = "none";
+      document.getElementById("finalMessage").style.display = "block";
+
+    });
+  }
+
+  startSlideshow();
+}
+
+
+  </script>
 </body>
 </html>
